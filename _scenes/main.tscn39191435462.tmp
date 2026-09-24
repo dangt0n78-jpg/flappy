@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://s87iejh5nbi5"]
+
+[ext_resource type="Texture2D" uid="uid://m0t36tf7x8i5" path="res://Flappy_Bird_assets by kosresetr55/Game Objects/background-day.png" id="1_dmym1"]
+[ext_resource type="Script" uid="uid://cp7xr2s3g8p4" path="res://_scenes/main.gd" id="1_lavtb"]
+[ext_resource type="PackedScene" uid="uid://bg6g1bmbhhe7t" path="res://_scenes/bird.tscn" id="2_x6rnu"]
+[ext_resource type="Script" uid="uid://cll574uk6vst5" path="res://_scripts/marker_2d.gd" id="3_3q5j6"]
+
+[node name="main" type="Node" unique_id=1705278253]
+script = ExtResource("1_lavtb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1362774114]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=92247000]
+offset_right = 1151.0
+offset_bottom = 647.0
+texture = ExtResource("1_dmym1")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1866238191]
+offset_left = 439.0
+offset_top = 27.0
+offset_right = 696.0
+offset_bottom = 123.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bird" parent="." unique_id=559005132 instance=ExtResource("2_x6rnu")]
+position = Vector2(462, 331)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2130091479]
+position = Vector2(577, 323)
+zoom = Vector2(3, 3)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=706942810]
+position = Vector2(773, 323)
+script = ExtResource("3_3q5j6")
+
+[node name="Timer" type="Timer" parent="Marker2D" unique_id=1711421363]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Marker2D/Timer" to="Marker2D" method="_on_timer_timeout"]

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://caddu8l05h78p"]
+
+[ext_resource type="Texture2D" uid="uid://cs2b5v60a8kjl" path="res://Flappy_Bird_assets by kosresetr55/Game Objects/base.png" id="1_0wq75"]
+[ext_resource type="Script" uid="uid://ccagxv4u8uvsc" path="res://_scripts/floor.gd" id="1_qplwl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3owqy"]
+distance = 53.0
+
+[node name="floor" type="Area2D" unique_id=353146628]
+script = ExtResource("1_qplwl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2098138212]
+position = Vector2(48.5, 0)
+scale = Vector2(1.2886904, 1)
+texture = ExtResource("1_0wq75")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=873041012]
+shape = SubResource("WorldBoundaryShape2D_3owqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

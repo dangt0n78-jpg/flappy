@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://rt1rep2y7dng"]
+
+[ext_resource type="Texture2D" uid="uid://bk6tiy60bshu5" path="res://Flappy_Bird_assets by kosresetr55/Game Objects/pipe-green.png" id="1_g5jku"]
+[ext_resource type="Script" uid="uid://cwf4u0udqxdw8" path="res://_scripts/pipe.gd" id="1_jqj7p"]
+[ext_resource type="Script" uid="uid://bi06ccyotm530" path="res://_scripts/score.gd" id="5_6lilg"]
+
+[sub_resource type="GDScript" id="GDScript_sy1to"]
+script/source = "extends Area2D
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	body.hide()
+	get_tree().paused = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8upip"]
+size = Vector2(48, 319)
+
+[sub_resource type="GDScript" id="GDScript_jqj7p"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body: Node2D) -> void:
+	body.hide()
+	get_tree().paused = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpga7"]
+size = Vector2(47, 319)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrfpl"]
+size = Vector2(38, 126)
+
+[node name="pipes" type="Node2D" unique_id=1129391429]
+process_mode = 1
+script = ExtResource("1_jqj7p")
+
+[node name="lowerpipe" type="Area2D" parent="." unique_id=2017542425]
+script = SubResource("GDScript_sy1to")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="lowerpipe" unique_id=2080398965]
+texture = ExtResource("1_g5jku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lowerpipe" unique_id=221149201]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8upip")
+
+[node name="upperpipe" type="Area2D" parent="." unique_id=1633569457]
+position = Vector2(1, -405)
+script = SubResource("GDScript_jqj7p")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="upperpipe" unique_id=1018880101]
+texture = ExtResource("1_g5jku")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upperpipe" unique_id=1822250442]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_dpga7")
+
+[node name="score" type="Area2D" parent="." unique_id=1945007772]
+position = Vector2(-2, -225)
+script = ExtResource("5_6lilg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score" unique_id=1586408804]
+position = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_hrfpl")
+
+[connection signal="body_entered" from="lowerpipe" to="." method="_on_lowerpipe_body_entered"]
+[connection signal="body_entered" from="upperpipe" to="." method="_on_upperpipe_body_entered"]
+[connection signal="body_exited" from="score" to="score" method="_on_body_exited"]
